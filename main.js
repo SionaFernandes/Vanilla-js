@@ -37,3 +37,39 @@ function togglediv() {
     togglebtn.innerHTML = "Hide items";
   }
 }
+
+//forms
+let formObject = {
+  name: "",
+  password: "",
+  email: "",
+  message: "",
+};
+let formArray = [];
+let formDetails = document.getElementById("form-details");
+
+const formElem = document.querySelector("form");
+formElem.addEventListener("submit", (e) => {
+  // on form submission, prevent default
+  e.preventDefault();
+
+  // construct a FormData object, which fires the formdata event
+  let formData = new FormData(formElem);
+  let name = formData.get("name");
+  let password = formData.get("password");
+  let email = formData.get("email");
+  let message = formData.get("message");
+
+  formObject.name = name;
+  formObject.password = password;
+  formObject.email = email;
+  formObject.message = message;
+  console.log(formObject);
+  formArray.push(formObject); //stores each form submit data in an array
+  console.log(formArray);
+
+  let text = JSON.stringify(formArray); //object to string
+  formDetails.innerHTML = text; //prints in html
+  formElem.reset(); // Reset all form data
+  return false; // Prevent page refresh
+});
