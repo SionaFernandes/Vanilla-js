@@ -45,7 +45,7 @@ let formObject = {
   email: "",
   message: "",
 };
-let formArray = [];
+
 let formDetails = document.getElementById("form-details");
 
 const formElem = document.querySelector("form");
@@ -65,11 +65,25 @@ formElem.addEventListener("submit", (e) => {
   formObject.email = email;
   formObject.message = message;
   console.log(formObject);
-  formArray.push(formObject); //stores each form submit data in an array
-  console.log(formArray);
 
-  let text = JSON.stringify(formArray); //object to string
-  formDetails.innerHTML = text; //prints in html
+  let uname = document.createElement("p");
+
+  uname.innerHTML =
+    "My name is " +
+    name +
+    "<br>" +
+    "my email is" +
+    email +
+    "<br>" +
+    "my password is" +
+    password +
+    "<br>" +
+    "my message is" +
+    message +
+    "<br>";
+
+  formDetails.appendChild(uname);
+
   formElem.reset(); // Reset all form data
   return false; // Prevent page refresh
 });
