@@ -59,12 +59,13 @@ formElem.addEventListener("submit", (e) => {
   let password = formData.get("password");
   let email = formData.get("email");
   let message = formData.get("message");
+  // console.log(name, password, email, message);
 
   formObject.name = name;
   formObject.password = password;
   formObject.email = email;
   formObject.message = message;
-  console.log(formObject);
+  // console.log(formObject);
 
   let uname = document.createElement("p");
 
