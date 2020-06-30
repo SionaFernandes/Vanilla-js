@@ -1,35 +1,5 @@
 let libraryContainer = document.getElementById("library-container");
 
-let bookNameInput = document.getElementById("book");
-let authorInput = document.getElementById("author");
-let descriptionInput = document.getElementById("description");
-let ownerInput = document.getElementById("owner");
-let imgUrlInput = document.getElementById("imgUrl");
-
-console.log(bookNameInput);
-
-//enter new book
-const formElem2 = document.querySelector("form");
-console.log(formElem2);
-formElem2.addEventListener("submit", (e) => {
-  // on form submission, prevent default
-  e.preventDefault();
-  console.log("clicked");
-
-  // construct a FormData object, which fires the formdata event
-  let formData2 = new FormData(formElem2);
-  let bookName = formData2.get("bookNameInput");
-  let author = formData2.get("authorInput");
-  let description = formData2.get("descriptionInput");
-  let owner = formData2.get("ownerInput");
-  let imgUrl = formData2.get("imgUrlInput");
-
-  console.log(bookName, author, description, owner, imgUrl);
-
-  formElem2.reset(); // Reset all form data
-  return false; // Prevent page refresh
-});
-
 let library = [
   {
     "book-name": "Romeo and Juliet",
@@ -51,24 +21,59 @@ let library = [
   },
 ];
 
-for (i = 0; i < library.length; i++) {
-  let libraryBook = document.createElement("p");
-  libraryBook.setAttribute("class", "book");
-  libraryBook.innerHTML =
-    "<b> Book name:</b>" +
-    library[i]["book-name"] +
-    "<br>" +
-    "<b> Author name:</b>" +
-    library[i]["author"] +
-    "<br>" +
-    "<b>Description:</b>" +
-    library[i]["description"] +
-    "<br>" +
-    "<b>Owner:</b>" +
-    library[i]["owner"] +
-    "<br>" +
-    "<b>Img url:</b> <img alt='book-img' src='" +
-    library[i]["img-url"] +
-    "'</img> <br>";
-  libraryContainer.appendChild(libraryBook);
+//enter new book
+const formElem2 = document.querySelector("form");
+formElem2.addEventListener("submit", (e) => {
+  // on form submission, prevent default
+  e.preventDefault();
+
+  // construct a FormData object, which fires the formdata event
+  let formData2 = new FormData(formElem2);
+  let bookName = formData2.get("book");
+  let author = formData2.get("author");
+  let description = formData2.get("description");
+  let owner = formData2.get("owner");
+  let imgUrl = formData2.get("imgUrl");
+
+  library.push({
+    "book-name": bookName,
+    author: author,
+    description: description,
+    owner: owner,
+    "img-url": imgUrl,
+  });
+
+  printLibrary();
+
+  formElem2.reset(); // Reset all form data
+
+  return false; // Prevent page refresh
+});
+
+function printLibrary() {
+  libraryContainer.innerHTML = " ";
+  for (i = 0; i < library.length; i++) {
+    let libraryBook = document.createElement("p");
+    libraryBook.setAttribute("class", "book");
+
+    libraryBook.innerHTML =
+      "<b> Book name:</b>" +
+      library[i]["book-name"] +
+      "<br>" +
+      "<b> Author name:</b>" +
+      library[i]["author"] +
+      "<br>" +
+      "<b>Description:</b>" +
+      library[i]["description"] +
+      "<br>" +
+      "<b>Owner:</b>" +
+      library[i]["owner"] +
+      "<br>" +
+      "<b>Img url:</b> <img alt='book-img' src='" +
+      library[i]["img-url"] +
+      "'</img> <br>";
+    libraryContainer.appendChild(libraryBook);
+  }
 }
+
+printLibrary();
