@@ -48,7 +48,7 @@ let formObject = {
 
 let formDetails = document.getElementById("form-details");
 
-const formElem = document.querySelector("form");
+const formElem = document.getElementById("form1");
 formElem.addEventListener("submit", (e) => {
   // on form submission, prevent default
   e.preventDefault();
@@ -88,3 +88,29 @@ formElem.addEventListener("submit", (e) => {
   formElem.reset(); // Reset all form data
   return false; // Prevent page refresh
 });
+
+//wrapping
+let formDetails2 = document.getElementById("form-string");
+let display = document.getElementById("string-wrap");
+formDetails2.addEventListener("submit", (e) => {
+  // on form submission, prevent default
+  e.preventDefault();
+
+  // construct a FormData object, which fires the formdata event
+  let formData = new FormData(formDetails2);
+  let string = formData.get("string");
+
+  let newstring = wrapChars(string);
+
+  let text = document.createElement("p");
+  text.innerHTML = newstring;
+
+  display.appendChild(text);
+
+  formDetails2.reset(); // Reset all form data
+  return false; // Prevent page refresh
+});
+
+function wrapChars(str, tmpl) {
+  return str.replace(/\w/g, tmpl || "<span class='animate'>$&</span>");
+}
