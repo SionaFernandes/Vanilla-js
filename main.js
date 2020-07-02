@@ -1,7 +1,19 @@
-let inputfield = document.getElementById("input-field");
-let inputbtn = document.getElementById("input-submit");
-let ul = document.getElementById("items");
-let togglebtn = document.getElementById("toggle-btn");
+const inputfield = document.getElementById("input-field");
+const inputbtn = document.getElementById("input-submit");
+const ul = document.getElementById("items");
+const togglebtn = document.getElementById("toggle-btn");
+const formDetails = document.getElementById("form-details");
+const formElem = document.getElementById("form1");
+const formDetails2 = document.getElementById("form-string");
+const display = document.getElementById("string-wrap");
+
+//forms
+let formObject = {
+  name: "",
+  password: "",
+  email: "",
+  message: "",
+};
 
 inputbtn.addEventListener("click", addItem);
 togglebtn.addEventListener("click", togglediv);
@@ -11,8 +23,8 @@ function addItem() {
   if (item === "") {
     return false;
   } else {
-    var li = document.createElement("li"); //creating the li
-    var text = document.createTextNode(item); //makes a node to add
+    let li = document.createElement("li"); //creating the li
+    let text = document.createTextNode(item); //makes a node to add
     li.appendChild(text); //putting the text from the input field into the li
     ul.appendChild(li); //adding the li to the ul
     inputfield.value = "";
@@ -21,7 +33,7 @@ function addItem() {
 
 //removing the li
 function removeItem(e) {
-  var target = e.target;
+  let target = e.target;
   if (target.tagName !== "LI") return;
   target.parentNode.removeChild(target);
 }
@@ -38,17 +50,6 @@ function togglediv() {
   }
 }
 
-//forms
-let formObject = {
-  name: "",
-  password: "",
-  email: "",
-  message: "",
-};
-
-let formDetails = document.getElementById("form-details");
-
-const formElem = document.getElementById("form1");
 formElem.addEventListener("submit", (e) => {
   // on form submission, prevent default
   e.preventDefault();
@@ -90,8 +91,7 @@ formElem.addEventListener("submit", (e) => {
 });
 
 //wrapping
-let formDetails2 = document.getElementById("form-string");
-let display = document.getElementById("string-wrap");
+
 formDetails2.addEventListener("submit", (e) => {
   // on form submission, prevent default
   e.preventDefault();
@@ -114,3 +114,5 @@ formDetails2.addEventListener("submit", (e) => {
 function wrapChars(str, tmpl) {
   return str.replace(/\w/g, tmpl || "<span class='animate'>$&</span>");
 }
+
+//chnage functions to arrow function
