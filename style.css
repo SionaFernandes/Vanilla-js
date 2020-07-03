@@ -12,3 +12,6 @@ section {
   transform: translateY(0px);
   transition: all 0.3s ease-in-out;
 }
+.error {
+  color: red;
+}

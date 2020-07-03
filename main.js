@@ -60,34 +60,37 @@ formElem.addEventListener("submit", (e) => {
   let password = formData.get("password");
   let email = formData.get("email");
   let message = formData.get("message");
-  // console.log(name, password, email, message);
 
-  formObject.name = name;
-  formObject.password = password;
-  formObject.email = email;
-  formObject.message = message;
-  // console.log(formObject);
+  let isvalidated = validateForm();
 
-  let uname = document.createElement("p");
+  if (isvalidated === true) {
+    console.log("in");
+    formObject.name = name;
+    formObject.password = password;
+    formObject.email = email;
+    formObject.message = message;
 
-  uname.innerHTML =
-    "My name is " +
-    name +
-    "<br>" +
-    "my email is" +
-    email +
-    "<br>" +
-    "my password is" +
-    password +
-    "<br>" +
-    "my message is" +
-    message +
-    "<br>";
+    let uname = document.createElement("p");
 
-  formDetails.appendChild(uname);
+    uname.innerHTML =
+      "My name is " +
+      name +
+      "<br>" +
+      "my email is" +
+      email +
+      "<br>" +
+      "my password is" +
+      password +
+      "<br>" +
+      "my message is" +
+      message +
+      "<br>";
 
-  formElem.reset(); // Reset all form data
-  return false; // Prevent page refresh
+    formDetails.appendChild(uname);
+
+    formElem.reset(); // Reset all form data
+    return false; // Prevent page refresh
+  }
 });
 
 //wrapping
@@ -121,4 +124,22 @@ formDetails2.addEventListener("submit", (e) => {
 
 wrapChars = (str, tmpl) => {
   return str.replace(/\w/g, tmpl || "<span>$&</span>");
+};
+
+validateForm = () => {
+  var names = ["name", "password", "email", "message"];
+  var errorCount = 0;
+  names.forEach(function (el) {
+    var val = formElem[el].value;
+    if (val == null || val == "") {
+      document.getElementById(el + "_error").textContent =
+        el.toUpperCase().replace("_", " ") + " must be filled out";
+      ++errorCount;
+    } else {
+      document.getElementById(el + "_error").textContent = "";
+    }
+  });
+  if (errorCount === 0) {
+    return true;
+  } else return false;
 };
