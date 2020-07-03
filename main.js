@@ -15,8 +15,6 @@ let formObject = {
   message: "",
 };
 
-inputbtn.addEventListener("click", addItem);
-togglebtn.addEventListener("click", togglediv);
 //adding items to the ul
 addItem = () => {
   let item = inputfield.value;
@@ -30,6 +28,7 @@ addItem = () => {
     inputfield.value = "";
   }
 };
+inputbtn.addEventListener("click", addItem);
 
 //removing the li
 removeItem = (e) => {
@@ -49,6 +48,7 @@ togglediv = () => {
     togglebtn.innerHTML = "Hide items";
   }
 };
+togglebtn.addEventListener("click", togglediv);
 
 formElem.addEventListener("submit", (e) => {
   // on form submission, prevent default
@@ -110,11 +110,7 @@ formDetails2.addEventListener("submit", (e) => {
   display.appendChild(text);
 
   for (let i = 0; i < spans.length; i++) {
-    animate(i);
-  }
-  function animate(i) {
-    setTimeout(function () {
-      console.log(i, spans[i]);
+    setTimeout(() => {
       spans[i].classList.add("animate");
     }, 600 * i);
   }
