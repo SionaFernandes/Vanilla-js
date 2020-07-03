@@ -18,7 +18,7 @@ let formObject = {
 inputbtn.addEventListener("click", addItem);
 togglebtn.addEventListener("click", togglediv);
 //adding items to the ul
-function addItem() {
+addItem = () => {
   let item = inputfield.value;
   if (item === "") {
     return false;
@@ -29,18 +29,18 @@ function addItem() {
     ul.appendChild(li); //adding the li to the ul
     inputfield.value = "";
   }
-}
+};
 
 //removing the li
-function removeItem(e) {
+removeItem = (e) => {
   let target = e.target;
   if (target.tagName !== "LI") return;
   target.parentNode.removeChild(target);
-}
+};
 ul.addEventListener("click", removeItem);
 
 //show/hide the div
-function togglediv() {
+togglediv = () => {
   if (ul.style.display !== "none") {
     ul.style.display = "none";
     togglebtn.innerHTML = "Show items";
@@ -48,7 +48,7 @@ function togglediv() {
     ul.style.display = "block";
     togglebtn.innerHTML = "Hide items";
   }
-}
+};
 
 formElem.addEventListener("submit", (e) => {
   // on form submission, prevent default
@@ -103,16 +103,26 @@ formDetails2.addEventListener("submit", (e) => {
   let newstring = wrapChars(string);
 
   let text = document.createElement("p");
+  text.setAttribute("class", "span-area");
   text.innerHTML = newstring;
 
+  let spans = text.getElementsByTagName("span");
   display.appendChild(text);
+
+  for (let i = 0; i < spans.length; i++) {
+    animate(i);
+  }
+  function animate(i) {
+    setTimeout(function () {
+      console.log(i, spans[i]);
+      spans[i].classList.add("animate");
+    }, 600 * i);
+  }
 
   formDetails2.reset(); // Reset all form data
   return false; // Prevent page refresh
 });
 
-function wrapChars(str, tmpl) {
-  return str.replace(/\w/g, tmpl || "<span class='animate'>$&</span>");
-}
-
-//chnage functions to arrow function
+wrapChars = (str, tmpl) => {
+  return str.replace(/\w/g, tmpl || "<span>$&</span>");
+};
